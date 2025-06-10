@@ -126,9 +126,9 @@ const App = () => (
       <AuthProvider>
         <Toaster />
         <Sonner />
-        <HashRouter>
+        <BrowserRouter>
           <AppContent />
-        </HashRouter>
+        </BrowserRouter>
       </AuthProvider>
     </TooltipProvider>
   </QueryClientProvider>
