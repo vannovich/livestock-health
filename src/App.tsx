@@ -1,10 +1,15 @@
-
 import React from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  useLocation,
+  HashRouter,
+} from "react-router-dom";
 import { AuthProvider, useAuth } from "./contexts/AuthContext";
 import { Navigation } from "./components/Navigation";
 import Index from "./pages/Index";
@@ -44,7 +49,7 @@ const queryClient = new QueryClient({
 const AppContent = () => {
   const { isAuthenticated } = useAuth();
   const location = useLocation();
-  
+
   // Show navigation on all pages except login
   const showNavigation = isAuthenticated;
 
@@ -55,20 +60,33 @@ const AppContent = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {showNavigation && <Navigation />}
-      <main className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ${showNavigation ? 'py-8' : ''}`}>
+      <main
+        className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ${
+          showNavigation ? "py-8" : ""
+        }`}
+      >
         <Routes>
           <Route path="/" element={<Index />} />
-          
+
           {/* Farmer Routes */}
           <Route path="/farmer/dashboard" element={<FarmerDashboard />} />
           <Route path="/farmer/tips" element={<HealthTips />} />
           <Route path="/farmer/vets" element={<FindVeterinarians />} />
           <Route path="/farmer/consultations" element={<MyConsultations />} />
-          <Route path="/farmer/consultations/new" element={<RequestConsultation />} />
-          <Route path="/farmer/consultation/:id" element={<ConsultationChat />} />
-          <Route path="/farmer/consultation/:id/payment" element={<ConsultationPayment />} />
+          <Route
+            path="/farmer/consultations/new"
+            element={<RequestConsultation />}
+          />
+          <Route
+            path="/farmer/consultation/:id"
+            element={<ConsultationChat />}
+          />
+          <Route
+            path="/farmer/consultation/:id/payment"
+            element={<ConsultationPayment />}
+          />
           <Route path="/subscription" element={<SubscriptionPlans />} />
-          
+
           {/* Vet Routes */}
           <Route path="/vet/dashboard" element={<VetDashboard />} />
           <Route path="/vet/schedule" element={<VetSchedule />} />
@@ -76,21 +94,24 @@ const AppContent = () => {
           <Route path="/vet/patients" element={<PatientHistory />} />
           <Route path="/vet/reminders" element={<SendReminder />} />
           <Route path="/vet/prescriptions" element={<WritePrescription />} />
-          <Route path="/vet/consultation/:id" element={<ConsultationDetails />} />
-          
+          <Route
+            path="/vet/consultation/:id"
+            element={<ConsultationDetails />}
+          />
+
           {/* Admin Routes */}
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
           <Route path="/admin/users" element={<ManageUsers />} />
           <Route path="/admin/analytics" element={<Analytics />} />
-          
+
           {/* Payment Routes */}
           <Route path="/payment-success" element={<PaymentSuccess />} />
           <Route path="/payment-cancel" element={<PaymentCancel />} />
-          
+
           {/* General Routes */}
           <Route path="/contact" element={<Contact />} />
           <Route path="/profile" element={<NotFound />} />
-          
+
           {/* 404 Route */}
           <Route path="*" element={<NotFound />} />
         </Routes>
@@ -105,9 +126,9 @@ const App = () => (
       <AuthProvider>
         <Toaster />
         <Sonner />
-        <BrowserRouter>
+        <HashRouter>
           <AppContent />
-        </BrowserRouter>
+        </HashRouter>
       </AuthProvider>
     </TooltipProvider>
   </QueryClientProvider>
