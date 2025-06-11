@@ -85,7 +85,10 @@ export function Navigation() {
                 >
                   Dashboard
                 </Link>
-                <Link className="text-gray-700 hover:text-primary transition-colors">
+                <Link
+                  to="/vet/dashboard"
+                  className="text-gray-700 hover:text-primary transition-colors"
+                >
                   Consultations
                 </Link>
                 <Link

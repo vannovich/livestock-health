@@ -107,7 +107,7 @@ export function Contact() {
                         type="tel"
                         name="phone"
                         className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                        placeholder="+237 XXX XXX XXX"
+                        placeholder="+XXX XXX XXX XXX"
                         value={formData.phone}
                         onChange={handleInputChange}
                       />
@@ -117,6 +117,7 @@ export function Contact() {
                         Subject *
                       </label>
                       <select
+                        title="subject"
                         name="subject"
                         className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
                         value={formData.subject}
@@ -212,7 +213,7 @@ export function Contact() {
                   For urgent veterinary emergencies, contact our 24/7 emergency
                   line:
                 </p>
-                <Button className="w-full bg-red-600 hover:bg-red-700">
+                <Button className="w-full bg-red-600 hover:bg-red-700 text-white">
                   <Phone className="h-4 w-4 mr-2" />
                   Emergency: +237 666 456 456
                 </Button>
@@ -224,15 +225,24 @@ export function Contact() {
                 <CardTitle className="text-blue-800">Quick Support</CardTitle>
               </CardHeader>
               <CardContent className="space-y-2">
-                <Button variant="outline" className="w-full justify-start">
+                <Button
+                  variant="outline"
+                  className="w-full justify-start text-blue-800 border-blue-800"
+                >
                   <Phone className="h-4 w-4 mr-2" />
                   Call Support
                 </Button>
-                <Button variant="outline" className="w-full justify-start">
+                <Button
+                  variant="outline"
+                  className="w-full justify-start text-blue-800 border-blue-800"
+                >
                   <Mail className="h-4 w-4 mr-2" />
                   Email Support
                 </Button>
-                <Button variant="outline" className="w-full justify-start">
+                <Button
+                  variant="outline"
+                  className="w-full justify-start text-blue-800 border-blue-800"
+                >
                   WhatsApp Support
                 </Button>
               </CardContent>
