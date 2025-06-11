@@ -1,30 +1,41 @@
-
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
-import { Button } from './ui/button';
-import { ArrowLeft, Phone, Mail, MapPin, Clock, Send } from 'lucide-react';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "./ui/card";
+import { Button } from "./ui/button";
+import { ArrowLeft, Phone, Mail, MapPin, Clock, Send } from "lucide-react";
 
 export function Contact() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    subject: '',
-    message: ''
+    name: "",
+    email: "",
+    phone: "",
+    subject: "",
+    message: "",
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert('Thank you for your message! We will get back to you within 24 hours.');
-    setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
+    alert(
+      "Thank you for your message! We will get back to you within 24 hours."
+    );
+    setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    setFormData(prev => ({
+  const handleInputChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
+    setFormData((prev) => ({
       ...prev,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     }));
   };
 
@@ -38,7 +49,9 @@ export function Contact() {
           </Button>
           <div className="flex-1">
             <h1 className="text-3xl font-bold text-gray-900">Contact Us</h1>
-            <p className="text-gray-600">Get in touch with our veterinary support team</p>
+            <p className="text-gray-600">
+              Get in touch with our veterinary support team
+            </p>
           </div>
         </div>
 
@@ -47,7 +60,10 @@ export function Contact() {
             <Card>
               <CardHeader>
                 <CardTitle>Send us a Message</CardTitle>
-                <CardDescription>Fill out the form below and we'll get back to you as soon as possible</CardDescription>
+                <CardDescription>
+                  Fill out the form below and we'll get back to you as soon as
+                  possible
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <form onSubmit={handleSubmit} className="space-y-6">
@@ -108,7 +124,9 @@ export function Contact() {
                         required
                       >
                         <option value="">Select a subject</option>
-                        <option value="consultation">Consultation Support</option>
+                        <option value="consultation">
+                          Consultation Support
+                        </option>
                         <option value="payment">Payment Issues</option>
                         <option value="technical">Technical Support</option>
                         <option value="emergency">Emergency</option>
@@ -152,7 +170,7 @@ export function Contact() {
                   <Phone className="h-5 w-5 text-primary mt-1" />
                   <div>
                     <p className="font-medium">Phone</p>
-                    <p className="text-gray-600">+237 233 XX XXXX</p>
+                    <p className="text-gray-600">+237 233 234 456</p>
                     <p className="text-sm text-gray-500">Mon-Fri: 8AM-8PM</p>
                   </div>
                 </div>
@@ -185,15 +203,18 @@ export function Contact() {
 
             <Card className="bg-red-50 border-red-200">
               <CardHeader>
-                <CardTitle className="text-red-800">Emergency Support</CardTitle>
+                <CardTitle className="text-red-800">
+                  Emergency Support
+                </CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-red-700 mb-3">
-                  For urgent veterinary emergencies, contact our 24/7 emergency line:
+                  For urgent veterinary emergencies, contact our 24/7 emergency
+                  line:
                 </p>
                 <Button className="w-full bg-red-600 hover:bg-red-700">
                   <Phone className="h-4 w-4 mr-2" />
-                  Emergency: +237 666 XX XXXX
+                  Emergency: +237 666 456 456
                 </Button>
               </CardContent>
             </Card>

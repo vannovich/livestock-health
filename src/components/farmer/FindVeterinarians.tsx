@@ -1,44 +1,57 @@
-
-import { useState } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
-import { Button } from '../ui/button';
-import { Badge } from '../ui/badge';
-import { Input } from '../ui/input';
-import { mockVeterinarians } from '../../data/mockData';
-import { Search, Star, MapPin, Phone, Clock } from 'lucide-react';
+import { useState } from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "../ui/card";
+import { Button } from "../ui/button";
+import { Badge } from "../ui/badge";
+import { Input } from "../ui/input";
+import { mockVeterinarians } from "../../data/mockData";
+import { Search, Star, MapPin, Phone, Clock } from "lucide-react";
 
 export function FindVeterinarians() {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedSpecialization, setSelectedSpecialization] = useState<string>('all');
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedSpecialization, setSelectedSpecialization] =
+    useState<string>("all");
 
   // TODO: Replace with real API call
-  const filteredVets = mockVeterinarians.filter(vet => {
-    const matchesSearch = vet.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         vet.specialization.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesSpecialization = selectedSpecialization === 'all' || 
-                                 vet.specialization === selectedSpecialization;
+  const filteredVets = mockVeterinarians.filter((vet) => {
+    const matchesSearch =
+      vet.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      vet.specialization.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesSpecialization =
+      selectedSpecialization === "all" ||
+      vet.specialization === selectedSpecialization;
     return matchesSearch && matchesSpecialization;
   });
 
-  const specializations = ['all', ...Array.from(new Set(mockVeterinarians.map(vet => vet.specialization)))];
+  const specializations = [
+    "all",
+    ...Array.from(new Set(mockVeterinarians.map((vet) => vet.specialization))),
+  ];
 
   const handleContactVet = (vetId: string) => {
     // TODO: Implement actual contact functionality
-    console.log('Contacting vet:', vetId);
-    alert('Contact functionality would open chat or phone dialog');
+    console.log("Contacting vet:", vetId);
+    alert("Contact functionality would open chat or phone dialog");
   };
 
   const handleBookConsultation = (vetId: string) => {
     // TODO: Navigate to booking form with pre-selected vet
-    console.log('Booking consultation with vet:', vetId);
-    alert('Booking functionality would open consultation form');
+    console.log("Booking consultation with vet:", vetId);
+    alert("Booking functionality would open consultation form");
   };
 
   return (
     <div className="space-y-6">
       <div>
         <h1 className="text-3xl font-bold text-gray-900">Find Veterinarians</h1>
-        <p className="text-gray-600">Connect with qualified veterinarians in your area</p>
+        <p className="text-gray-600">
+          Connect with qualified veterinarians in your area
+        </p>
       </div>
 
       {/* Search and Filters */}
@@ -53,14 +66,14 @@ export function FindVeterinarians() {
           />
         </div>
         <div className="flex flex-wrap gap-2">
-          {specializations.map(spec => (
-            <Badge 
+          {specializations.map((spec) => (
+            <Badge
               key={spec}
-              variant={selectedSpecialization === spec ? 'default' : 'outline'}
+              variant={selectedSpecialization === spec ? "default" : "outline"}
               className="cursor-pointer hover:bg-primary/80"
               onClick={() => setSelectedSpecialization(spec)}
             >
-              {spec === 'all' ? 'All Specializations' : spec}
+              {spec === "all" ? "All Specializations" : spec}
             </Badge>
           ))}
         </div>
@@ -76,13 +89,21 @@ export function FindVeterinarians() {
                   <CardTitle className="flex items-center gap-2">
                     {vet.name}
                     {vet.isVerified && (
-                      <Badge className="bg-green-100 text-green-800 text-xs">Verified</Badge>
+                      <Badge className="bg-green-100 text-green-800 text-xs">
+                        Verified
+                      </Badge>
                     )}
                   </CardTitle>
                   <CardDescription>{vet.specialization}</CardDescription>
                 </div>
-                <Badge className={vet.isAvailable ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'}>
-                  {vet.isAvailable ? 'Available' : 'Busy'}
+                <Badge
+                  className={
+                    vet.isAvailable
+                      ? "bg-green-100 text-green-800"
+                      : "bg-gray-100 text-gray-800"
+                  }
+                >
+                  {vet.isAvailable ? "Available" : "Busy"}
                 </Badge>
               </div>
             </CardHeader>
@@ -90,7 +111,9 @@ export function FindVeterinarians() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
                 <div className="flex items-center gap-2">
                   <Star className="h-4 w-4 text-yellow-500" />
-                  <span>{vet.rating}/5 ({vet.experience}y experience)</span>
+                  <span>
+                    {vet.rating}/5 ({vet.experience}y experience)
+                  </span>
                 </div>
                 <div className="flex items-center gap-2">
                   <MapPin className="h-4 w-4 text-gray-500" />
@@ -124,15 +147,15 @@ export function FindVeterinarians() {
               </div>
 
               <div className="flex gap-2 pt-2">
-                <Button 
+                <Button
                   onClick={() => handleBookConsultation(vet.id)}
                   className="flex-1"
                   disabled={!vet.isAvailable}
                 >
                   Book Consultation
                 </Button>
-                <Button 
-                  variant="outline" 
+                <Button
+                  variant="outline"
                   onClick={() => handleContactVet(vet.id)}
                   disabled={!vet.isAvailable}
                 >
@@ -147,11 +170,16 @@ export function FindVeterinarians() {
       {filteredVets.length === 0 && (
         <Card>
           <CardContent className="text-center py-12">
-            <p className="text-gray-500 mb-4">No veterinarians found matching your criteria.</p>
-            <Button variant="outline" onClick={() => {
-              setSearchTerm('');
-              setSelectedSpecialization('all');
-            }}>
+            <p className="text-gray-500 mb-4">
+              No veterinarians found matching your criteria.
+            </p>
+            <Button
+              variant="outline"
+              onClick={() => {
+                setSearchTerm("");
+                setSelectedSpecialization("all");
+              }}
+            >
               Clear Filters
             </Button>
           </CardContent>
@@ -161,12 +189,18 @@ export function FindVeterinarians() {
       {/* Emergency Notice */}
       <Card className="bg-yellow-50 border-yellow-200">
         <CardContent className="p-6">
-          <h3 className="font-semibold text-yellow-800 mb-2">🚨 Emergency Situations</h3>
+          <h3 className="font-semibold text-yellow-800 mb-2">
+            🚨 Emergency Situations
+          </h3>
           <p className="text-yellow-700 mb-3">
-            For critical animal emergencies, contact our 24/7 emergency hotline instead of booking regular consultations.
+            For critical animal emergencies, contact our 24/7 emergency hotline
+            instead of booking regular consultations.
           </p>
-          <Button variant="outline" className="border-yellow-300 text-yellow-800 hover:bg-yellow-100">
-            📞 Emergency Hotline: +237 233 XX XXXX
+          <Button
+            variant="outline"
+            className="border-yellow-300 text-yellow-800 hover:bg-yellow-100"
+          >
+            📞 Emergency Hotline: +237 233 234 435
           </Button>
         </CardContent>
       </Card>
